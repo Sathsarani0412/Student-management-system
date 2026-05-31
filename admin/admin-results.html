@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Results | EduCare</title>
+
+    <link rel="stylesheet" href="/css/admin-results.css">
+
+    <!-- GOOGLE FONT -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="logo-section">
+
+            <img src="/images/logo.png">
+
+            <div>
+                <h2>EduCare</h2>
+                <p>Admin Panel</p>
+            </div>
+
+        </div>
+
+        <nav class="sidebar-menu">
+
+            <a href="/admin/dashboard">
+                <i class="fa-solid fa-house"></i>
+                Dashboard
+            </a>
+
+            <a href="/admin/students">
+                <i class="fa-solid fa-users"></i>
+                Students
+            </a>
+
+            <a href="/admin/attendance">
+                <i class="fa-regular fa-calendar-check"></i>
+                Attendance
+            </a>
+
+            <a href="/admin/results" class="active">
+                <i class="fa-solid fa-chart-column"></i>
+                Results
+            </a>
+
+            <a href="/admin/notices">
+                <i class="fa-regular fa-bell"></i>
+                Notices
+            </a>
+
+            <a href="/admin/settings">
+                <i class="fa-solid fa-gear"></i>
+                Settings
+            </a>
+
+            <a href="/login">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+            </a>
+
+        </nav>
+
+    </aside>
+
+    <!-- MAIN -->
+
+    <main class="main-content">
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div class="search-box">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input type="text" placeholder="Search anything...">
+
+            </div>
+
+            <div class="admin-profile">
+
+                <i class="fa-regular fa-bell notification"></i>
+
+                <img src="https://i.pravatar.cc/40">
+
+                <div>
+                    <h4>Admin</h4>
+                    <p>Super Admin</p>
+                </div>
+
+            </div>
+
+        </header>
+
+        <!-- PAGE TITLE -->
+
+        <div class="page-header">
+
+            <h1>Results Management</h1>
+
+            <button class="add-btn">
+                <i class="fa-solid fa-plus"></i>
+                Add Results
+            </button>
+
+        </div>
+
+        <!-- RESULT CARDS -->
+
+        <section class="result-cards">
+
+            <div class="card">
+
+                <i class="fa-solid fa-users"></i>
+
+                <div>
+                    <h2>512</h2>
+                    <p>Total Students</p>
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <i class="fa-solid fa-book"></i>
+
+                <div>
+                    <h2>24</h2>
+                    <p>Total Subjects</p>
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <i class="fa-solid fa-chart-line"></i>
+
+                <div>
+                    <h2>8.45</h2>
+                    <p>Average GPA</p>
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                <div>
+                    <h2>94%</h2>
+                    <p>Pass Rate</p>
+                </div>
+
+            </div>
+
+        </section>
+        <div class="result-form">
+
+    <h2>Add Student Result</h2>
+
+    <select id="studentSelect"></select>
+
+    <select id="semester">
+
+        <option value="Semester 1">Semester 1</option>
+        <option value="Semester 2">Semester 2</option>
+        <option value="Semester 3">Semester 3</option>
+        <option value="Semester 4">Semester 4</option>
+
+    </select>
+
+    <input
+    type="text"
+    id="subjectCode"
+    placeholder="Subject Code">
+
+    <input
+    type="text"
+    id="subjectName"
+    placeholder="Subject Name">
+
+    <input
+    type="number"
+    id="credits"
+    placeholder="Credits">
+
+    <input
+    type="number"
+    id="marks"
+    placeholder="Marks">
+
+    <button onclick="saveResult()"
+    style="
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:8px;
+    cursor:pointer;
+    ">
+
+        Save Result
+
+    </button>
+
+</div>
+<select id="semesterFilter"
+onchange="loadResults()">
+
+    <option value="">
+        All Semesters
+    </option>
+
+    <option value="Semester 1">
+        Semester 1
+    </option>
+
+    <option value="Semester 2">
+        Semester 2
+    </option>
+
+    <option value="Semester 3">
+        Semester 3
+    </option>
+
+    <option value="Semester 4">
+        Semester 4
+    </option>
+
+</select>
+
+        <!-- RESULTS TABLE -->
+
+        <section class="table-section">
+
+            <div class="table-header">
+
+                <h2>Student Results</h2>
+
+                <input type="text" placeholder="Search Student">
+
+            </div>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Course</th>
+                        <th>GPA</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                        <th>Semester</th>
+
+                    </tr>
+
+                </thead>
+
+             <tbody id="resultsBody">
+
+             </tbody>   
+
+            </table>
+
+        </section>
+
+    </main>
+
+</div>
+<script>
+
+loadStudents();
+loadResults();
+
+function loadStudents(){
+
+    fetch("/results-students")
+
+    .then(res=>res.json())
+
+    .then(data=>{
+
+        const select =
+        document.getElementById(
+            "studentSelect"
+        );
+
+        select.innerHTML="";
+
+        data.forEach(student=>{
+
+            select.innerHTML += `
+
+            <option value="${student.id}">
+
+            ${student.fullname}
+            (${student.course})
+
+            </option>
+
+            `;
+
+        });
+
+    });
+
+}
+
+function calculateGrade(mark){
+
+    if(mark >= 90)
+        return ["A+",4.0];
+
+    if(mark >= 80)
+        return ["A",4.0];
+
+    if(mark >= 75)
+        return ["B+",3.5];
+
+    if(mark >= 65)
+        return ["B",3.0];
+
+    if(mark >= 55)
+        return ["C",2.0];
+
+    if(mark >= 40)
+        return ["D",1.0];
+
+    return ["F",0.0];
+
+}
+
+function saveResult(){
+
+    const studentId =
+    document.getElementById(
+        "studentSelect"
+    ).value;
+
+    const semester =
+    document.getElementById(
+        "semester"
+    ).value;
+
+    const subjectCode =
+    document.getElementById(
+        "subjectCode"
+    ).value;
+
+    const subjectName =
+    document.getElementById(
+        "subjectName"
+    ).value;
+
+    const credits =
+    document.getElementById(
+        "credits"
+    ).value;
+
+    const marks =
+    document.getElementById(
+        "marks"
+    ).value;
+
+    let grade;
+    let gpa;
+
+    if(marks === ""){
+
+        grade = "Absent";
+        gpa = 0;
+
+    }else{
+
+        const result =
+        calculateGrade(
+            Number(marks)
+        );
+
+        grade =
+        result[0];
+
+        gpa =
+        result[1];
+
+    }
+
+    fetch("/add-result",{
+
+        method:"POST",
+
+        headers:{
+            "Content-Type":
+            "application/json"
+        },
+
+        body:JSON.stringify({
+
+            studentId,
+            semester,
+            subjectCode,
+            subjectName,
+            credits,
+            marks,
+            grade,
+            gpa
+
+        })
+
+    })
+
+    .then(res=>res.text())
+
+    .then(msg=>{
+
+        alert(msg);
+
+        loadResults();
+
+    });
+
+}
+
+function loadResults(){
+
+    const semester =
+    document.getElementById(
+        "semesterFilter"
+    ).value;
+
+    fetch(
+        "/results-data?semester="
+        + encodeURIComponent(
+            semester
+        )
+    )
+
+    .then(res=>res.json())
+
+    .then(data=>{
+
+        const body =
+        document.getElementById(
+            "resultsBody"
+        );
+
+        body.innerHTML="";
+
+        data.forEach(row=>{
+
+            body.innerHTML += `
+
+            <tr>
+
+                <td>${row.student_id}</td>
+
+                <td>${row.fullname}</td>
+
+                <td>${row.course}</td>
+
+                <td>${row.semester}</td>
+
+                <td>${row.gpa}</td>
+
+                <td>
+
+                <span class="status ${
+                    row.gpa >= 2
+                    ? "pass"
+                    : "fail"
+                }">
+
+                ${
+                    row.gpa >= 2
+                    ? "Pass"
+                    : "Fail"
+                }
+
+                </span>
+
+                </td>
+
+            </tr>
+
+            `;
+
+        });
+
+    });
+
+}
+
+
+</script>
+
+</body>
+</html>

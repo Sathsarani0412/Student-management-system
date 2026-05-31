@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+    <title>Student Profile | EduCare</title>
+
+    <link rel="stylesheet"
+    href="/css/student-profile.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+
+.save-course-btn{
+
+    margin-top:10px;
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:600;
+    font-size:14px;
+    transition:0.3s;
+
+}
+
+.save-course-btn:hover{
+
+    background:#1d4ed8;
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <div class="logo">
+
+        <img src="/images/logo.png">
+
+        <div>
+            <h2>EduCare</h2>
+            <p>Student Management System</p>
+        </div>
+
+    </div>
+
+    <ul>
+
+        <li>
+            <a href="/student/dashboard">
+                <i class="fa-solid fa-house"></i>
+                Dashboard
+            </a>
+        </li>
+
+        <li class="active">
+            <a href="/student/profile">
+                <i class="fa-regular fa-user"></i>
+                Profile
+            </a>
+        </li>
+
+        <li>
+            <a href="/student/attendance">
+                <i class="fa-regular fa-calendar-check"></i>
+                Attendance
+            </a>
+        </li>
+
+        <li>
+            <a href="/student/results">
+                <i class="fa-regular fa-square-check"></i>
+                Results
+            </a>
+        </li>
+
+        <li>
+            <a href="/student/notices">
+                <i class="fa-regular fa-bell"></i>
+                Notices
+            </a>
+        </li>
+
+        <li>
+            <a href="/">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+            </a>
+        </li>
+
+    </ul>
+
+</div>
+
+<div class="main-content">
+
+    <div class="topbar">
+
+        <div class="search-box">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+            type="text"
+            id="searchInput"
+            placeholder="Search anything...">
+
+        </div>
+
+        <div class="top-right">
+
+            <i class="fa-regular fa-bell notification"></i>
+
+            <div class="student-mini">
+
+                <img src="https://i.pravatar.cc/100">
+
+                <div>
+
+                    <h4 id="miniName">
+                        Student
+                    </h4>
+
+                    <p>Student</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="page-title">
+
+        <h1>My Profile</h1>
+
+        <p>Dashboard > Profile</p>
+
+    </div>
+
+    <div class="profile-container">
+
+        <div class="profile-left">
+
+            <img
+            src="https://i.pravatar.cc/200"
+            class="profile-image">
+
+            <h2 id="studentName">
+                Student Name
+            </h2>
+
+            <p id="studentCourse">
+                No Course
+            </p>
+
+            <button onclick="editProfile()">
+
+                <i class="fa-solid fa-pen"></i>
+
+                Edit Profile
+
+            </button>
+
+        </div>
+
+        <div class="profile-right">
+
+            <div class="info-row">
+
+                <span>
+                    <i class="fa-regular fa-id-card"></i>
+                    Student ID
+                </span>
+
+                <p id="studentId"></p>
+
+            </div>
+
+            <div class="info-row">
+
+                <span>
+                    <i class="fa-regular fa-user"></i>
+                    Full Name
+                </span>
+
+                <p id="fullName"></p>
+
+            </div>
+
+            <div class="info-row">
+
+                <span>
+                    <i class="fa-regular fa-envelope"></i>
+                    Email
+                </span>
+
+                <p id="studentEmail"></p>
+
+            </div>
+
+            <div class="info-row">
+
+                <span>
+                    <i class="fa-solid fa-phone"></i>
+                    Phone
+                </span>
+
+                <p id="studentPhone"></p>
+
+            </div>
+
+            <div class="info-row">
+
+                <span>
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    Course
+                </span>
+
+                <p id="courseText"></p>
+
+            </div>
+
+            <div class="info-row">
+
+                <span>
+                    <i class="fa-solid fa-book"></i>
+                    Enroll Course
+                </span>
+
+                <div>
+
+                    <select id="courseSelect">
+
+                    </select>
+
+                 <button
+class="save-course-btn"
+onclick="saveCourse()">
+
+    Save Course
+
+</button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+let currentUser = null;
+
+/* LOAD USER */
+
+fetch("/current-user")
+.then(res => res.json())
+.then(user => {
+
+    currentUser = user;
+
+    document.getElementById("studentName")
+    .innerText = user.fullname;
+
+    document.getElementById("miniName")
+    .innerText = user.fullname;
+
+    document.getElementById("studentId")
+    .innerText = user.student_id;
+
+    document.getElementById("fullName")
+    .innerText = user.fullname;
+
+    document.getElementById("studentEmail")
+    .innerText = user.email;
+
+    document.getElementById("studentPhone")
+    .innerText = user.phone;
+
+    document.getElementById("studentCourse")
+    .innerText = user.course;
+
+    document.getElementById("courseText")
+    .innerText = user.course;
+
+});
+
+/* LOAD COURSES */
+
+fetch("/courses-data")
+.then(res => res.json())
+.then(data => {
+
+    const select =
+    document.getElementById("courseSelect");
+
+    data.forEach(course => {
+
+        select.innerHTML += `
+
+        <option value="${course.title}">
+            ${course.title}
+        </option>
+
+        `;
+
+    });
+
+});
+
+/* SAVE COURSE */
+
+function saveCourse(){
+
+    const course =
+    document.getElementById(
+        "courseSelect"
+    ).value;
+
+    fetch("/update-course", {
+
+        method: "PUT",
+
+        headers: {
+
+            "Content-Type":
+            "application/json"
+
+        },
+
+        body: JSON.stringify({
+
+            course
+
+        })
+
+    })
+    .then(res => res.text())
+    .then(() => {
+
+        alert("Course Updated");
+
+        location.reload();
+
+    });
+
+}
+
+/* EDIT PROFILE */
+
+function editProfile(){
+
+    const fullname =
+    prompt(
+        "Enter Full Name",
+        currentUser.fullname
+    );
+
+    const phone =
+    prompt(
+        "Enter Phone",
+        currentUser.phone
+    );
+
+    const email =
+    prompt(
+        "Enter Email",
+        currentUser.email
+    );
+
+    fetch("/update-profile", {
+
+        method: "PUT",
+
+        headers: {
+
+            "Content-Type":
+            "application/json"
+
+        },
+
+        body: JSON.stringify({
+
+            fullname,
+            phone,
+            email
+
+        })
+
+    })
+    .then(res => res.text())
+    .then(() => {
+
+        alert("Profile Updated");
+
+        location.reload();
+
+    });
+
+}
+
+/* SEARCH */
+
+document.getElementById("searchInput")
+.addEventListener("keyup", function(){
+
+    const value =
+    this.value.toLowerCase();
+
+    const body =
+    document.body.innerText.toLowerCase();
+
+    if(body.includes(value)){
+
+        console.log("Found");
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>

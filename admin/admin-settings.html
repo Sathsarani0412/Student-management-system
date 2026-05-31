@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Settings | EduCare</title>
+
+    <link rel="stylesheet" href="/css/admin-settings.css">
+
+    <!-- GOOGLE FONT -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="logo-section">
+
+            <img src="/images/logo.png">
+
+            <div>
+                <h2>EduCare</h2>
+                <p>Admin Panel</p>
+            </div>
+
+        </div>
+
+        <nav class="sidebar-menu">
+
+            <a href="/admin/dashboard">
+                <i class="fa-solid fa-house"></i>
+                Dashboard
+            </a>
+
+            <a href="/admin/students">
+                <i class="fa-solid fa-users"></i>
+                Students
+            </a>
+
+            <a href="/admin/attendance">
+                <i class="fa-solid fa-calendar-check"></i>
+                Attendance
+            </a>
+
+            <a href="/admin/results">
+                <i class="fa-solid fa-chart-column"></i>
+                Results
+            </a>
+
+            <a href="/admin/notices">
+                <i class="fa-solid fa-bell"></i>
+                Notices
+            </a>
+
+            <a href="/admin/settings" class="active">
+                <i class="fa-solid fa-gear"></i>
+                Settings
+            </a>
+
+            <a href="/login">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+            </a>
+
+        </nav>
+
+    </aside>
+
+    <!-- MAIN CONTENT -->
+
+    <main class="main-content">
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <h1>Settings</h1>
+
+            <div class="admin-profile">
+
+                <img src="https://i.pravatar.cc/40">
+
+                <div>
+                    <h4>Admin</h4>
+                    <p>Super Admin</p>
+                </div>
+
+            </div>
+
+        </header>
+
+        <!-- SETTINGS GRID -->
+
+        <section class="settings-grid">
+
+            <!-- PROFILE SETTINGS -->
+
+            <div class="settings-card">
+
+                <h2>
+                    <i class="fa-solid fa-user"></i>
+                    Profile Settings
+                </h2>
+
+                <form>
+
+                    <div class="input-group">
+
+                        <label>Admin Name</label>
+
+                        <input type="text"
+                        value="Admin User">
+
+                    </div>
+
+                    <div class="input-group">
+
+                        <label>Email Address</label>
+
+                        <input type="email"
+                        value="admin@educare.com">
+
+                    </div>
+
+                    <button type="submit">
+                        Save Changes
+                    </button>
+
+                </form>
+
+            </div>
+
+            <!-- PASSWORD SETTINGS -->
+
+            <div class="settings-card">
+
+                <h2>
+                    <i class="fa-solid fa-lock"></i>
+                    Change Password
+                </h2>
+
+                <form>
+
+                    <div class="input-group">
+
+                        <label>Current Password</label>
+
+                        <input type="password">
+
+                    </div>
+
+                    <div class="input-group">
+
+                        <label>New Password</label>
+
+                        <input type="password">
+
+                    </div>
+
+                    <div class="input-group">
+
+                        <label>Confirm Password</label>
+
+                        <input type="password">
+
+                    </div>
+
+                    <button type="submit">
+                        Update Password
+                    </button>
+
+                </form>
+
+            </div>
+
+            <!-- SYSTEM SETTINGS -->
+
+            <div class="settings-card">
+
+                <h2>
+                    <i class="fa-solid fa-sliders"></i>
+                    System Settings
+                </h2>
+
+                <div class="toggle-row">
+
+                    <span>Email Notifications</span>
+
+                    <label class="switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+
+                </div>
+
+                <div class="toggle-row">
+
+                    <span>Student Registration</span>
+
+                    <label class="switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+
+                </div>
+
+                <div class="toggle-row">
+
+                    <span>Maintenance Mode</span>
+
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+
+                </div>
+
+            </div>
+
+            <!-- THEME SETTINGS -->
+
+            <div class="settings-card">
+
+                <h2>
+                    <i class="fa-solid fa-palette"></i>
+                    Theme Settings
+                </h2>
+
+                <div class="theme-options">
+
+                    <div class="theme blue"></div>
+
+                    <div class="theme dark"></div>
+
+                    <div class="theme green"></div>
+
+                    <div class="theme purple"></div>
+
+                </div>
+
+                <button class="theme-btn">
+                    Apply Theme
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>

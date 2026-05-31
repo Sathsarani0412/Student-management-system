@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Attendance | EduCare</title>
+
+    <link rel="stylesheet" href="/css/student-attendance.css">
+
+    <!-- GOOGLE FONT -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+
+    <div class="sidebar">
+
+        <div class="logo">
+
+            <img src="/images/logo.png">
+
+            <div>
+                <h2>EduCare</h2>
+                <p>Student Management System</p>
+            </div>
+
+        </div>
+
+        <ul>
+
+            <li>
+                <a href="/student/dashboard">
+                    <i class="fa-solid fa-house"></i>
+                    Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="/student/profile">
+                    <i class="fa-regular fa-user"></i>
+                    Profile
+                </a>
+            </li>
+
+            <li class="active">
+                <a href="/student/attendance">
+                    <i class="fa-regular fa-calendar-check"></i>
+                    Attendance
+                </a>
+            </li>
+
+            <li>
+                <a href="/student/results">
+                    <i class="fa-regular fa-square-check"></i>
+                    Results
+                </a>
+            </li>
+
+            <li>
+                <a href="/student/notices">
+                    <i class="fa-regular fa-bell"></i>
+                    Notices
+                </a>
+            </li>
+
+            <li>
+                <a href="/logout">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Logout
+                </a>
+            </li>
+
+        </ul>
+
+    </div>
+
+    <!-- MAIN CONTENT -->
+
+    <div class="main-content">
+
+        <!-- TOPBAR -->
+
+        <div class="topbar">
+
+            <div class="menu-icon">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+
+            <div class="top-right">
+
+                <div class="search-box">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input
+                        type="text"
+                        placeholder="Search anything...">
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- PAGE TITLE -->
+
+        <div class="page-title">
+
+            <h1>Attendance</h1>
+
+            <p>Dashboard > Attendance</p>
+
+        </div>
+
+        <!-- STATS -->
+
+        <div class="attendance-stats">
+
+            <div class="stat-card">
+
+                <div class="icon blue">
+                    <i class="fa-regular fa-calendar"></i>
+                </div>
+
+                <div>
+                    <p>Total Classes</p>
+                    <h2 id="totalClasses">0</h2>
+                </div>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="icon green">
+                    <i class="fa-regular fa-circle-check"></i>
+                </div>
+
+                <div>
+                    <p>Present</p>
+                    <h2 id="presentCount">0</h2>
+                </div>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="icon red">
+                    <i class="fa-regular fa-circle-xmark"></i>
+                </div>
+
+                <div>
+                    <p>Absent</p>
+                    <h2 id="absentCount">0</h2>
+                </div>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="icon orange">
+                    <i class="fa-solid fa-chart-pie"></i>
+                </div>
+
+                <div>
+                    <p>Attendance</p>
+                    <h2 id="attendancePercent">0%</h2>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- TABLE -->
+
+        <div class="attendance-table-container">
+
+            <div class="table-top">
+
+                <h2>Attendance Records</h2>
+
+                <div class="filter-box">
+
+                    <select>
+                        <option>Current Records</option>
+                    </select>
+
+                    <button>
+                        <i class="fa-solid fa-filter"></i>
+                        Filter
+                    </button>
+
+                </div>
+
+            </div>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Date</th>
+                        <th>Course</th>
+                        <th>Status</th>
+                        <th>Remarks</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="studentAttendanceBody">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        loadAttendance();
+        loadStats();
+
+        function loadAttendance() {
+
+            fetch("/student-attendance-data")
+
+                .then(res => res.json())
+
+                .then(data => {
+
+                    const body =
+                        document.getElementById(
+                            "studentAttendanceBody"
+                        );
+
+                    body.innerHTML = "";
+
+                    if (data.length === 0) {
+
+                        body.innerHTML = `
+
+                        <tr>
+
+                            <td colspan="4"
+                            style="text-align:center;padding:20px;">
+
+                                No attendance records found
+
+                            </td>
+
+                        </tr>
+
+                        `;
+
+                        return;
+                    }
+
+                    data.forEach(row => {
+
+                        body.innerHTML += `
+
+                        <tr>
+
+                            <td>${row.attendance_date}</td>
+
+                            <td>${row.course}</td>
+
+                            <td>
+
+                                <span class="${row.status === "Present"
+                                ? "present"
+                                : "absent"
+                            }">
+
+                                    ${row.status}
+
+                                </span>
+
+                            </td>
+
+                            <td>-</td>
+
+                        </tr>
+
+                        `;
+
+                    });
+
+                });
+
+        }
+
+        function loadStats() {
+
+            fetch("/student-attendance-stats")
+
+                .then(res => res.json())
+
+                .then(data => {
+
+                    document.getElementById(
+                        "totalClasses"
+                    ).innerText =
+                        data.total || 0;
+
+                    document.getElementById(
+                        "presentCount"
+                    ).innerText =
+                        data.present || 0;
+
+                    document.getElementById(
+                        "absentCount"
+                    ).innerText =
+                        data.absent || 0;
+
+                    document.getElementById(
+                        "attendancePercent"
+                    ).innerText =
+                        (data.rate || 0) + "%";
+
+                });
+
+        }
+
+    </script>
+
+</body>
+
+</html>

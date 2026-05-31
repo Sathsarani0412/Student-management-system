@@ -1,0 +1,317 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f5f7fb;
+}
+
+/* HEADER */
+
+header{
+    width:100%;
+    padding:18px 60px;
+    background:white;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    border-bottom:1px solid #e7e7e7;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo img{
+    width:52px;
+}
+
+.logo h2{
+    color:#1f5eff;
+    font-size:34px;
+}
+
+.logo p{
+    font-size:12px;
+    color:#666;
+}
+
+nav ul{
+    display:flex;
+    list-style:none;
+    gap:40px;
+}
+
+nav ul a{
+    text-decoration:none;
+    color:#111;
+    font-size:15px;
+    font-weight:500;
+    transition:0.3s;
+}
+
+nav ul a:hover{
+    color:#1f5eff;
+}
+
+.header-buttons{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.login-btn{
+    text-decoration:none;
+    padding:12px 28px;
+    border:1px solid #cfcfcf;
+    border-radius:10px;
+    color:#111;
+
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    font-weight:500;
+}
+
+.signup-btn{
+    text-decoration:none;
+    padding:12px 28px;
+    border-radius:10px;
+
+    background:#1f5eff;
+    color:white;
+
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    font-weight:500;
+}
+
+/* SIGNUP */
+
+.signup-section{
+    width:92%;
+    margin:40px auto;
+
+    background:white;
+    border-radius:25px;
+    overflow:hidden;
+
+    display:grid;
+    grid-template-columns:0.9fr 1.3fr;
+
+    box-shadow:0 5px 20px rgba(0,0,0,0.05);
+}
+
+/* LEFT */
+
+.signup-left{
+    background:#eef4ff;
+    padding:60px;
+    position:relative;
+}
+
+.signup-left h1{
+    font-size:58px;
+    line-height:1.2;
+    margin-bottom:20px;
+    color:#111;
+}
+
+.signup-left span{
+    color:#1f5eff;
+}
+
+.line{
+    width:70px;
+    height:4px;
+    background:#1f5eff;
+    border-radius:20px;
+    margin-bottom:30px;
+}
+
+.signup-left p{
+    font-size:18px;
+    color:#555;
+    line-height:1.8;
+    margin-bottom:50px;
+}
+
+.signup-left img{
+    width:100%;
+    max-width:380px;
+}
+
+/* RIGHT */
+
+.signup-right{
+    padding:60px;
+}
+
+.signup-right h2{
+    font-size:42px;
+    color:#111;
+    margin-bottom:8px;
+}
+
+.subtitle{
+    color:#666;
+    margin-bottom:35px;
+}
+
+.input-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.input-box{
+    position:relative;
+}
+
+.input-box i{
+    position:absolute;
+    left:18px;
+    top:18px;
+    color:#666;
+}
+
+.eye{
+    left:auto !important;
+    right:18px;
+    cursor:pointer;
+}
+
+.input-box input,
+.input-box select{
+    width:100%;
+    padding:16px 50px;
+    border:1px solid #d8d8d8;
+    border-radius:10px;
+    outline:none;
+    font-size:15px;
+    background:white;
+}
+
+.checkbox{
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    margin-top:25px;
+    margin-bottom:25px;
+}
+
+.checkbox p{
+    color:#555;
+    font-size:14px;
+}
+
+.checkbox span{
+    color:#1f5eff;
+}
+
+.signup-main-btn{
+    width:100%;
+    padding:16px;
+    border:none;
+    border-radius:10px;
+
+    background:#1f5eff;
+    color:white;
+
+    font-size:16px;
+    font-weight:500;
+
+    cursor:pointer;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:12px;
+}
+
+.bottom-text{
+    text-align:center;
+    margin-top:30px;
+    color:#555;
+}
+
+.bottom-text a{
+    text-decoration:none;
+    color:#1f5eff;
+    font-weight:600;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1000px){
+
+    .signup-section{
+        grid-template-columns:1fr;
+    }
+
+    .signup-left{
+        text-align:center;
+    }
+
+}
+
+@media(max-width:700px){
+
+    header{
+        flex-direction:column;
+        gap:20px;
+        padding:20px;
+    }
+
+    nav ul{
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+    .input-grid{
+        grid-template-columns:1fr;
+    }
+
+    .signup-left,
+    .signup-right{
+        padding:35px;
+    }
+
+    .signup-left h1{
+        font-size:42px;
+    }
+    
+
+}
+.signup-submit-btn{
+    width: 100%;
+    height: 55px;
+    border: none;
+    border-radius: 10px;
+    background: #2563eb;
+    color: white;
+    font-size: 17px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: 0.3s;
+}
+
+.signup-submit-btn i{
+    margin-left: 8px;
+}
+
+.signup-submit-btn:hover{
+    background: #1749b9;
+}

@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Students | EduCare</title>
+
+    <link rel="stylesheet"
+    href="/css/admin-student.css">
+
+    <!-- GOOGLE FONT -->
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+    <!-- FONT AWESOME -->
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <img src="/images/logo.png">
+
+            <div>
+
+                <h2>EduCare</h2>
+
+                <p>Admin Panel</p>
+
+            </div>
+
+        </div>
+
+        <ul>
+
+            <li>
+
+                <a href="/admin/dashboard">
+
+                    <i class="fa-solid fa-house"></i>
+
+                    Dashboard
+
+                </a>
+
+            </li>
+
+            <li class="active">
+
+                <a href="/admin/students">
+
+                    <i class="fa-solid fa-users"></i>
+
+                    Students
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="/admin/attendance">
+
+                    <i class="fa-regular fa-calendar-check"></i>
+
+                    Attendance
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="/admin/results">
+
+                    <i class="fa-solid fa-square-poll-vertical"></i>
+
+                    Results
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="/admin/notices">
+
+                    <i class="fa-regular fa-bell"></i>
+
+                    Notices
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="/admin/settings">
+
+                    <i class="fa-solid fa-gear"></i>
+
+                    Settings
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="/">
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+
+                    Logout
+
+                </a>
+
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <!-- MAIN -->
+
+    <main class="main-content">
+
+        <!-- TOPBAR -->
+
+        <div class="topbar">
+
+            <div class="search-box">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                type="text"
+                placeholder="Search students...">
+
+            </div>
+
+            <div class="admin-profile">
+
+                <img src="https://i.pravatar.cc/40">
+
+                <div>
+
+                    <h4>Admin</h4>
+
+                    <p>Super Admin</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- PAGE TITLE -->
+
+    <div class="page-title">
+
+    <h1>Student Management</h1>
+
+    <div style="display:flex; gap:15px;">
+
+        <button
+        class="add-btn"
+        onclick="openStudentModal()">
+
+            <i class="fa-solid fa-user-plus"></i>
+
+            Add Student
+
+        </button>
+
+        <button
+        class="add-btn"
+        onclick="openCourseModal()"
+        style="background:#16a34a;">
+
+            <i class="fa-solid fa-book"></i>
+
+            Add Course
+
+        </button>
+
+    </div>
+
+</div>   
+
+        <!-- STUDENT TABLE -->
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Course</th>
+                        <th>Year</th>
+                        <th>Email</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="studentTableBody">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </main>
+ <!-- ADD STUDENT MODAL -->
+
+<div
+id="studentModal"
+style="
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.5);
+justify-content:center;
+align-items:center;
+z-index:1000;
+">
+
+    <div style="
+    background:white;
+    width:400px;
+    padding:30px;
+    border-radius:12px;
+    ">
+
+        <h2>Add Student</h2>
+
+        <input
+        type="text"
+        id="studentName"
+        placeholder="Full Name"
+        style="width:100%;padding:12px;margin-top:15px;">
+
+        <input
+        type="email"
+        id="studentEmail"
+        placeholder="Email"
+        style="width:100%;padding:12px;margin-top:15px;">
+
+        <input
+        type="text"
+        id="studentPhone"
+        placeholder="Phone"
+        style="width:100%;padding:12px;margin-top:15px;">
+
+        <input
+        type="password"
+        id="studentPassword"
+        placeholder="Password"
+        style="width:100%;padding:12px;margin-top:15px;">
+
+        <div style="
+        display:flex;
+        gap:10px;
+        margin-top:20px;
+        ">
+
+            <button
+            onclick="saveStudent()"
+            style="
+            flex:1;
+            padding:12px;
+            border:none;
+            background:#2563eb;
+            color:white;
+            border-radius:8px;
+            cursor:pointer;
+            ">
+
+                Save
+
+            </button>
+
+            <button
+            onclick="closeStudentModal()"
+            style="
+            flex:1;
+            padding:12px;
+            border:none;
+            background:#ef4444;
+            color:white;
+            border-radius:8px;
+            cursor:pointer;
+            ">
+
+                Cancel
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ADD COURSE MODAL -->
+
+<div
+id="courseModal"
+style="
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.5);
+justify-content:center;
+align-items:center;
+z-index:1000;
+">
+
+    <div style="
+    background:white;
+    width:450px;
+    padding:30px;
+    border-radius:12px;
+    ">
+
+        <h2>Add Course</h2>
+
+        <input
+        type="text"
+        id="courseTitle"
+        placeholder="Course Name"
+        style="width:100%;padding:12px;margin-top:15px;">
+
+        <textarea
+        id="courseDescription"
+        placeholder="Course Description"
+        style="
+        width:100%;
+        padding:12px;
+        margin-top:15px;
+        height:100px;
+        "></textarea>
+
+        <input
+        type="text"
+        id="courseImage"
+        placeholder="Image URL"
+        style="width:100%;padding:12px;margin-top:15px;">
+
+        <input
+        type="text"
+        id="courseIcon"
+        placeholder="Icon Class Example: fa-solid fa-code"
+        style="width:100%;padding:12px;margin-top:15px;">
+
+        <div style="
+        display:flex;
+        gap:10px;
+        margin-top:20px;
+        ">
+
+            <button
+            onclick="saveCourseData()"
+            style="
+            flex:1;
+            padding:12px;
+            border:none;
+            background:#16a34a;
+            color:white;
+            border-radius:8px;
+            cursor:pointer;
+            ">
+
+                Save Course
+
+            </button>
+
+            <button
+            onclick="closeCourseModal()"
+            style="
+            flex:1;
+            padding:12px;
+            border:none;
+            background:#ef4444;
+            color:white;
+            border-radius:8px;
+            cursor:pointer;
+            ">
+
+                Cancel
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>   
+
+</div>
+
+<script>
+
+const tableBody =
+document.getElementById("studentTableBody");
+
+/* LOAD STUDENTS */
+
+function loadStudents(){
+
+fetch("/students-data")
+.then(res => res.json())
+.then(data => {
+
+    tableBody.innerHTML = "";
+
+    data.forEach(student => {
+
+        tableBody.innerHTML += `
+
+        <tr>
+
+            <td>${student.student_id}</td>
+
+            <td>${student.fullname}</td>
+
+            <td>${student.course}</td>
+
+            <td>${student.year}</td>
+
+            <td>${student.email}</td>
+
+            <td>
+
+                <span class="status ${student.status === 'Online'
+                    ? 'active-status'
+                    : 'inactive-status'}">
+
+                    ${student.status}
+
+                </span>
+
+            </td>
+
+            <td class="actions">
+
+                <button
+                    class="edit-btn"
+                    onclick="editStudent(${student.id})">
+
+                    Edit
+
+                </button>
+
+                <button
+                    class="delete-btn"
+                    onclick="deleteStudent(${student.id})">
+
+                    Delete
+
+                </button>
+
+            </td>
+
+        </tr>
+
+        `;
+
+    });
+
+});
+
+}
+
+loadStudents();
+
+/* SEARCH */
+
+document.querySelector(".search-box input")
+.addEventListener("keyup", function(){
+
+    const value =
+    this.value.toLowerCase();
+
+    const rows =
+    document.querySelectorAll(
+        "#studentTableBody tr"
+    );
+
+    rows.forEach(row => {
+
+        const text =
+        row.innerText.toLowerCase();
+
+        if(text.includes(value)){
+
+            row.style.display = "";
+
+        }else{
+
+            row.style.display = "none";
+
+        }
+
+    });
+
+});
+
+/* DELETE */
+
+function deleteStudent(id){
+
+    if(confirm("Delete this student?")){
+
+        fetch(`/delete-student/${id}`, {
+
+            method: "DELETE"
+
+        })
+        .then(() => {
+
+            loadStudents();
+
+        });
+
+    }
+
+}
+
+/* EDIT */
+
+function editStudent(id){
+
+    const course =
+    prompt("Enter Course");
+
+    const year =
+    prompt("Enter Year");
+
+    fetch(`/edit-student/${id}`, {
+
+        method: "PUT",
+
+        headers: {
+
+            "Content-Type":
+            "application/json"
+
+        },
+
+        body: JSON.stringify({
+
+            course,
+            year
+
+        })
+
+    })
+    .then(() => {
+
+        loadStudents();
+
+    });
+
+}
+
+/* OPEN STUDENT MODAL */
+
+function openStudentModal(){
+
+    document.getElementById(
+        "studentModal"
+    ).style.display = "flex";
+
+}
+
+/* CLOSE STUDENT MODAL */
+
+function closeStudentModal(){
+
+    document.getElementById(
+        "studentModal"
+    ).style.display = "none";
+
+}
+
+/* SAVE STUDENT */
+
+function saveStudent(){
+
+    const fullname =
+    document.getElementById(
+        "studentName"
+    ).value;
+
+    const email =
+    document.getElementById(
+        "studentEmail"
+    ).value;
+
+    const phone =
+    document.getElementById(
+        "studentPhone"
+    ).value;
+
+    const password =
+    document.getElementById(
+        "studentPassword"
+    ).value;
+
+    fetch("/admin-add-student", {
+
+        method: "POST",
+
+        headers: {
+
+            "Content-Type":
+            "application/json"
+
+        },
+
+        body: JSON.stringify({
+
+            fullname,
+            email,
+            phone,
+            password
+
+        })
+
+    })
+    .then(res => res.text())
+    .then(data => {
+
+        alert(data);
+
+        closeStudentModal();
+
+        loadStudents();
+
+    });
+
+}
+
+/* OPEN COURSE MODAL */
+
+function openCourseModal(){
+
+    document.getElementById(
+        "courseModal"
+    ).style.display = "flex";
+
+}
+
+/* CLOSE COURSE MODAL */
+
+function closeCourseModal(){
+
+    document.getElementById(
+        "courseModal"
+    ).style.display = "none";
+
+}
+
+/* SAVE COURSE */
+
+function saveCourseData(){
+
+    const title =
+    document.getElementById(
+        "courseTitle"
+    ).value;
+
+    const description =
+    document.getElementById(
+        "courseDescription"
+    ).value;
+
+    const image =
+    document.getElementById(
+        "courseImage"
+    ).value;
+
+    const icon =
+    document.getElementById(
+        "courseIcon"
+    ).value;
+
+    fetch("/add-course", {
+
+        method: "POST",
+
+        headers: {
+
+            "Content-Type":
+            "application/json"
+
+        },
+
+        body: JSON.stringify({
+
+            title,
+            description,
+            image,
+            icon
+
+        })
+
+    })
+    .then(res => res.text())
+    .then(data => {
+
+        alert(data);
+
+        closeCourseModal();
+
+    });
+
+}
+
+</script>
+</body>
+</html>

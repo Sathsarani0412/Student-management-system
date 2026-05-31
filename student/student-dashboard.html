@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Dashboard | EduCare</title>
+
+    <link rel="stylesheet" href="/css/student-dashboard.css">
+
+    <!-- GOOGLE FONT -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <img src="/images/logo.png">
+
+            <div>
+                <h2>EduCare</h2>
+                <p>Student Portal</p>
+            </div>
+
+        </div>
+
+        <ul>
+
+            <li class="active">
+                <a href="/student/dashboard">
+                    <i class="fa-solid fa-house"></i>
+                    Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="/student/profile">
+                    <i class="fa-regular fa-user"></i>
+                    Profile
+                </a>
+            </li>
+
+            <li>
+                <a href="/student/attendance">
+                    <i class="fa-regular fa-calendar"></i>
+                    Attendance
+                </a>
+            </li>
+
+            <li>
+                <a href="/student/results">
+                    <i class="fa-solid fa-chart-column"></i>
+                    Results
+                </a>
+            </li>
+
+            <li>
+                <a href="/student/notices">
+                    <i class="fa-regular fa-bell"></i>
+                    Notices
+                </a>
+            </li>
+
+            <li>
+                <a href="/">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Logout
+                </a>
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <!-- MAIN -->
+
+    <main class="main-content">
+
+        <!-- TOPBAR -->
+
+        <div class="topbar">
+
+            <div>
+                <h1>
+                    Welcome Back,
+                   <span id="studentName">Student 👋</span>
+                </h1>
+
+                <p>
+                    Here's what's happening with your academics.
+                </p>
+            </div>
+
+            <div class="profile-box">
+
+                <i class="fa-regular fa-bell"></i>
+
+                <img src="https://i.pravatar.cc/100">
+
+            </div>
+
+        </div>
+
+        <!-- CARDS -->
+
+        <section class="stats-grid">
+
+            <div class="stat-card">
+
+                <div class="icon blue">
+                    <i class="fa-regular fa-calendar"></i>
+                </div>
+
+                <div>
+                    <h2 id="attendance">0%</h2>
+                    <p>Attendance</p>
+                </div>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="icon green">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+
+                <div>
+                    <h2 id="cgpa">0</h2>
+                    <p>CGPA</p>
+                </div>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="icon purple">
+                    <i class="fa-solid fa-book"></i>
+                </div>
+
+                <div>
+                    <h2 id="subjects">0</h2>
+                    <p>Subjects</p>
+                </div>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="icon orange">
+                    <i class="fa-regular fa-bell"></i>
+                </div>
+
+                <div>
+                   <h2 id="notices">0</h2>
+                    <p>Notices</p>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- PANELS -->
+
+        <section class="dashboard-grid">
+
+            <div class="panel">
+
+                <div class="panel-top">
+
+                    <h3>Attendance Overview</h3>
+
+                </div>
+
+                <div class="circle">
+
+                    <h1>92%</h1>
+                    <p>Present</p>
+
+                </div>
+
+            </div>
+
+            <div class="panel">
+
+                <div class="panel-top">
+
+                    <h3>Recent Notices</h3>
+
+                </div>
+
+                <div class="notice">
+
+                    <h4>Mid Term Exam Schedule</h4>
+                    <p>10 May 2026</p>
+
+                </div>
+
+                <div class="notice">
+
+                    <h4>College Annual Fest</h4>
+                    <p>8 May 2026</p>
+
+                </div>
+
+                <div class="notice">
+
+                    <h4>Library Maintenance</h4>
+                    <p>6 May 2026</p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- EXAMS -->
+
+        <section class="exam-section">
+
+            <div class="panel-top">
+
+                <h3>Upcoming Exams</h3>
+
+            </div>
+
+            <table>
+
+                <tr>
+                    <th>Subject</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                </tr>
+
+                <tr>
+                    <td>Data Structures</td>
+                    <td>15 May 2026</td>
+                    <td>10.00 AM</td>
+                    <td><span class="badge">In 5 Days</span></td>
+                </tr>
+
+                <tr>
+                    <td>DBMS</td>
+                    <td>20 May 2026</td>
+                    <td>10.00 AM</td>
+                    <td><span class="badge">In 10 Days</span></td>
+                </tr>
+
+                <tr>
+                    <td>Operating Systems</td>
+                    <td>25 May 2026</td>
+                    <td>10.00 AM</td>
+                    <td><span class="badge">In 15 Days</span></td>
+                </tr>
+
+            </table>
+
+        </section>
+
+    </main>
+
+<script>
+
+fetch("/current-user")
+.then(res => res.json())
+.then(user => {
+
+    if(user){
+
+        document.getElementById(
+            "studentName"
+        ).innerHTML =
+        `${user.fullname} 👋`;
+
+    }
+
+});
+fetch("/student-dashboard-stats")
+
+.then(res=>res.json())
+
+.then(data=>{
+
+    document.getElementById(
+        "attendance"
+    ).innerText =
+    data.attendance + "%";
+
+    document.getElementById(
+        "cgpa"
+    ).innerText =
+    data.cgpa;
+
+    document.getElementById(
+        "subjects"
+    ).innerText =
+    data.subjects;
+
+    document.getElementById(
+        "notices"
+    ).innerText =
+    data.notices;
+
+});
+
+</script>
+
+</body>
+
+</html>

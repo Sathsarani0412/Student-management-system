@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Results | EduCare</title>
+
+    <link rel="stylesheet" href="/css/student-results.css">
+
+    <!-- GOOGLE FONT -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+
+    <div class="sidebar">
+
+        <div class="logo">
+
+            <img src="/images/logo.png">
+
+            <div>
+                <h2>EduCare</h2>
+                <p>Student Management System</p>
+            </div>
+
+        </div>
+
+        <ul>
+
+            <li>
+                <a href="/student/dashboard">
+                    <i class="fa-solid fa-house"></i>
+                    Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="/student/profile">
+                    <i class="fa-regular fa-user"></i>
+                    Profile
+                </a>
+            </li>
+
+            <li>
+                <a href="/student/attendance">
+                    <i class="fa-regular fa-calendar-check"></i>
+                    Attendance
+                </a>
+            </li>
+
+            <li class="active">
+                <a href="/student/results">
+                    <i class="fa-regular fa-square-check"></i>
+                    Results
+                </a>
+            </li>
+
+            <li>
+                <a href="/student/notices">
+                    <i class="fa-regular fa-bell"></i>
+                    Notices
+                </a>
+            </li>
+
+            <li>
+                <a href="/">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Logout
+                </a>
+            </li>
+
+        </ul>
+
+    </div>
+
+    <!-- MAIN CONTENT -->
+
+    <div class="main-content">
+
+        <!-- TOPBAR -->
+
+        <div class="topbar">
+
+            <div class="menu-icon">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+
+            <div class="search-box">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input type="text" placeholder="Search anything...">
+
+            </div>
+
+        </div>
+
+        <!-- PAGE TITLE -->
+
+        <div class="page-title">
+
+            <div>
+                <h1>Results</h1>
+                <p>Dashboard > Results</p>
+            </div>
+
+            <div class="semester-box">
+
+                <label>Semester:</label>
+
+                
+<select id="semesterFilter" onchange="loadResults()">
+
+    <option value="Semester 1">Semester 1</option>
+    <option value="Semester 2">Semester 2</option>
+    <option value="Semester 3">Semester 3</option>
+    <option value="Semester 4" selected>Semester 4</option>
+
+</select>
+            </div>
+
+        </div>
+
+        <!-- STATS -->
+
+        <div class="result-stats">
+
+            <div class="stat-card">
+
+                <p>SGPA</p>
+
+              <h2 id="sgpa">0.00</h2>  
+
+            </div>
+
+            <div class="stat-card">
+
+                <p>CGPA</p>
+
+               <h2 id="cgpa">0.00</h2>
+
+            </div>
+
+            <div class="stat-card">
+
+                <p>Total Subjects</p>
+
+             <h2 id="totalSubjects">0</h2>
+            </div>
+
+            <div class="stat-card pass">
+
+                <p>Result Status</p>
+
+                <h2 id="resultStatus">Pending</h2>
+            </div>
+
+        </div>
+
+        <!-- RESULTS TABLE -->
+
+        <div class="results-table">
+
+            <h2>Subject Wise Results</h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Subject Code</th>
+                        <th>Subject Name</th>
+                        <th>Credits</th>
+                        <th>Marks Obtained</th>
+                        <th>Grade</th>
+
+                    </tr>
+
+                </thead>
+
+               <tbody id="studentResultsBody">
+
+</tbody> 
+            </table>
+
+            <!-- BOTTOM SUMMARY -->
+
+            <div class="summary-box">
+
+                <div>
+                    <p>Total Credits</p>
+                 <h3 id="totalCredits">0</h3>  
+                </div>
+
+                <div>
+                    <p>SGPA</p>
+                    <h3 id="summaryGpa">0.00</h3>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+<script>
+
+loadResults();
+
+function loadResults(){
+
+    const semester =
+    document.getElementById(
+        "semesterFilter"
+    ).value;
+
+    fetch(
+        "/student-results-data?semester="
+        + encodeURIComponent(
+            semester
+        )
+    )
+
+    .then(res=>res.json())
+
+    .then(data=>{
+
+        const body =
+        document.getElementById(
+            "studentResultsBody"
+        );
+
+        body.innerHTML = "";
+
+        data.results.forEach(row=>{
+
+            body.innerHTML += `
+
+            <tr>
+
+                <td>${row.subject_code}</td>
+
+                <td>${row.subject_name}</td>
+
+                <td>${row.credits}</td>
+
+                <td>
+
+                ${
+                    row.grade === "Absent"
+                    ? "Absent"
+                    : row.marks + " / 100"
+                }
+
+                </td>
+
+                <td>${row.grade}</td>
+
+            </tr>
+
+            `;
+
+        });
+
+        document.getElementById(
+            "sgpa"
+        ).innerText =
+        data.sgpa;
+
+        document.getElementById(
+            "cgpa"
+        ).innerText =
+        data.cgpa;
+
+        document.getElementById(
+            "totalSubjects"
+        ).innerText =
+        data.totalSubjects;
+
+        document.getElementById(
+            "resultStatus"
+        ).innerText =
+        data.status;
+
+        document.getElementById(
+            "totalCredits"
+        ).innerText =
+        data.totalCredits;
+
+        document.getElementById(
+            "summaryGpa"
+        ).innerText =
+        data.sgpa;
+
+    });
+
+}
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Attendance | EduCare</title>
+
+    <link rel="stylesheet" href="/css/admin-attendance.css">
+
+    <!-- GOOGLE FONT -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+
+<body>
+
+    <div class="dashboard-container">
+
+        <!-- SIDEBAR -->
+
+        <aside class="sidebar">
+
+            <div class="logo-section">
+
+                <img src="/images/logo.png">
+
+                <div>
+                    <h2>EduCare</h2>
+                    <p>Admin Panel</p>
+                </div>
+
+            </div>
+
+            <ul class="sidebar-menu">
+
+                <li>
+                    <a href="/admin/dashboard">
+                        <i class="fa-solid fa-house"></i>
+                        Dashboard
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/admin/students">
+                        <i class="fa-solid fa-users"></i>
+                        Students
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/admin/attendance" class="active">
+                        <i class="fa-regular fa-calendar-check"></i>
+                        Attendance
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/admin/results">
+                        <i class="fa-regular fa-square-check"></i>
+                        Results
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/admin/notices">
+                        <i class="fa-regular fa-bell"></i>
+                        Notices
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/admin/settings">
+                        <i class="fa-solid fa-gear"></i>
+                        Settings
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/logout">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        Logout
+                    </a>
+                </li>
+
+            </ul>
+
+        </aside>
+
+        <!-- MAIN -->
+
+        <main class="main-content">
+
+            <!-- TOPBAR -->
+
+            <div class="topbar">
+
+                <div class="menu-icon">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+
+                <div class="search-box">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input
+                        type="text"
+                        placeholder="Search anything...">
+
+                </div>
+
+                <div class="topbar-right">
+
+                    <i class="fa-regular fa-bell notification"></i>
+
+                    <div class="admin-profile">
+
+                        <img src="https://i.pravatar.cc/40">
+
+                        <div>
+                            <h4>Admin</h4>
+                            <p>Super Admin</p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- PAGE TITLE -->
+
+            <div class="page-header">
+
+                <h1>Attendance Management</h1>
+
+                <p>
+                    Manage and monitor student attendance records.
+                </p>
+
+            </div>
+
+            <!-- STATS -->
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+
+                    <i class="fa-solid fa-users"></i>
+
+                    <div>
+                        <h2 id="totalStudents">0</h2>
+                        <p>Total Students</p>
+                    </div>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <i class="fa-solid fa-user-check"></i>
+
+                    <div>
+                        <h2 id="presentToday">0</h2>
+                        <p>Present Today</p>
+                    </div>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <i class="fa-solid fa-user-xmark"></i>
+
+                    <div>
+                        <h2 id="absentToday">0</h2>
+                        <p>Absent Today</p>
+                    </div>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <i class="fa-solid fa-chart-pie"></i>
+
+                    <div>
+                        <h2 id="attendanceRate">0%</h2>
+                        <p>Attendance Rate</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- ATTENDANCE FORM -->
+
+            <div class="attendance-form">
+
+                <h2>Mark Attendance</h2>
+
+                <select id="studentSelect"></select>
+
+                <input
+                    type="date"
+                    id="attendanceDate">
+
+                <select id="attendanceStatus">
+
+                    <option value="Present">
+                        Present
+                    </option>
+
+                    <option value="Absent">
+                        Absent
+                    </option>
+
+                </select>
+
+                <button onclick="saveAttendance()">
+                    Save Attendance
+                </button>
+
+            </div>
+
+            <!-- TABLE -->
+
+            <div class="attendance-table">
+
+                <div class="table-header">
+
+                    <h2>Student Attendance Records</h2>
+
+                    <button>
+                        <i class="fa-solid fa-filter"></i>
+                        Filter
+                    </button>
+
+                </div>
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Course</th>
+                            <th>Status</th>
+                            <th>Date</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="attendanceBody">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </main>
+
+    </div>
+
+    <script>
+
+        loadStudents();
+        loadAttendance();
+        loadStats();
+
+        document.getElementById("attendanceDate").value =
+            new Date().toISOString().split("T")[0];
+
+        function loadStudents() {
+
+            fetch("/attendance-students")
+                .then(res => res.json())
+                .then(data => {
+
+                    const select =
+                        document.getElementById(
+                            "studentSelect"
+                        );
+
+                    select.innerHTML = "";
+
+                    data.forEach(student => {
+
+                        select.innerHTML += `
+
+                        <option
+                        value="${student.id}"
+                        data-course="${student.course}">
+
+                        ${student.fullname}
+                        (${student.course})
+
+                        </option>
+
+                        `;
+
+                    });
+
+                });
+
+        }
+
+        function saveAttendance() {
+
+            const select =
+                document.getElementById(
+                    "studentSelect"
+                );
+
+            const studentId =
+                select.value;
+
+            const course =
+                select.options[
+                    select.selectedIndex
+                ].dataset.course;
+
+            const attendanceDate =
+                document.getElementById(
+                    "attendanceDate"
+                ).value;
+
+            const status =
+                document.getElementById(
+                    "attendanceStatus"
+                ).value;
+
+            fetch("/add-attendance", {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type":
+                        "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    studentId,
+                    course,
+                    attendanceDate,
+                    status
+
+                })
+
+            })
+
+                .then(res => res.text())
+
+                .then(msg => {
+
+                    alert(msg);
+
+                    loadAttendance();
+
+                    loadStats();
+
+                });
+
+        }
+
+        function loadAttendance() {
+
+            fetch("/attendance-data")
+
+                .then(res => res.json())
+
+                .then(data => {
+
+                    const body =
+                        document.getElementById(
+                            "attendanceBody"
+                        );
+
+                    body.innerHTML = "";
+
+                    data.forEach(row => {
+
+                        body.innerHTML += `
+
+                        <tr>
+
+                        <td>${row.student_id}</td>
+
+                        <td>${row.fullname}</td>
+
+                        <td>${row.course}</td>
+
+                        <td>
+
+                        <span class="${row.status === "Present"
+                                ? "present"
+                                : "absent"
+                            }">
+
+                        ${row.status}
+
+                        </span>
+
+                        </td>
+
+                        <td>${row.attendance_date}</td>
+
+                        </tr>
+
+                        `;
+
+                    });
+
+                });
+
+        }
+
+        function loadStats() {
+
+            fetch("/attendance-stats")
+
+                .then(res => res.json())
+
+                .then(data => {
+
+                    document.getElementById(
+                        "totalStudents"
+                    ).innerText =
+                        data.totalStudents || 0;
+
+                    document.getElementById(
+                        "presentToday"
+                    ).innerText =
+                        data.present || 0;
+
+                    document.getElementById(
+                        "absentToday"
+                    ).innerText =
+                        data.absent || 0;
+
+                    document.getElementById(
+                        "attendanceRate"
+                    ).innerText =
+                        (data.rate || 0) + "%";
+
+                });
+
+        }
+
+    </script>
+
+</body>
+
+</html>

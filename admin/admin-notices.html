@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Notices | EduCare</title>
+
+    <link rel="stylesheet" href="/css/admin-notices.css">
+
+    <!-- GOOGLE FONT -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <img src="/images/logo.png">
+
+            <div>
+                <h2>EduCare</h2>
+                <p>Admin Panel</p>
+            </div>
+
+        </div>
+
+        <ul class="menu">
+
+            <li>
+                <a href="/admin/dashboard">
+                    <i class="fa-solid fa-house"></i>
+                    Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="/admin/students">
+                    <i class="fa-solid fa-users"></i>
+                    Students
+                </a>
+            </li>
+
+            <li>
+                <a href="/admin/attendance">
+                    <i class="fa-solid fa-calendar-check"></i>
+                    Attendance
+                </a>
+            </li>
+
+            <li>
+                <a href="/admin/results">
+                    <i class="fa-solid fa-square-poll-horizontal"></i>
+                    Results
+                </a>
+            </li>
+
+            <li>
+                <a href="/admin/notices" class="active">
+                    <i class="fa-solid fa-bell"></i>
+                    Notices
+                </a>
+            </li>
+
+            <li>
+                <a href="/admin/settings">
+                    <i class="fa-solid fa-gear"></i>
+                    Settings
+                </a>
+            </li>
+
+            <li>
+                <a href="/login">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Logout
+                </a>
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <!-- MAIN CONTENT -->
+
+    <main class="main-content">
+
+        <!-- TOPBAR -->
+
+        <div class="topbar">
+
+            <div class="search-box">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input type="text" placeholder="Search notices...">
+
+            </div>
+
+            <div class="admin-profile">
+
+                <img src="https://i.pravatar.cc/40">
+
+                <div>
+                    <h4>Admin</h4>
+                    <p>Super Admin</p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- PAGE HEADER -->
+
+        <div class="page-header">
+
+            <h1>Notice Management</h1>
+
+            <button class="add-btn">
+                <i class="fa-solid fa-plus"></i>
+                Add Notice
+            </button>
+
+        </div>
+
+        <!-- NOTICE FORM -->
+
+        <div class="notice-form-card">
+
+            <h2>Create New Notice</h2>
+
+            <form action="/add-notice" method="POST">
+
+                <div class="form-group">
+
+                    <label>Notice Title</label>
+
+                    <input 
+                    type="text" 
+                    name="title"
+                    placeholder="Enter notice title"
+                    required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Category</label>
+
+                    <select name="category" required>
+
+                        <option value="">Select Category</option>
+                        <option>Academic</option>
+                        <option>Event</option>
+                        <option>Holiday</option>
+                        <option>Important</option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Description</label>
+
+                    <textarea 
+                    rows="5"
+                    name="description"
+                    placeholder="Enter notice details"
+                    required></textarea>
+
+                </div>
+
+                <button type="submit" class="publish-btn">
+
+                    Publish Notice
+
+                </button>
+
+            </form>
+
+        </div>
+
+        <!-- PUBLISHED NOTICES -->
+
+        <div class="notice-list-card">
+
+            <div class="card-header">
+
+                <h2>Published Notices</h2>
+
+            </div>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Title</th>
+                        <th>Category</th>
+                        <th>Date</th>
+                        <th>Status</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="noticeTableBody">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <!-- CONTACT MESSAGES -->
+
+        <div class="notice-list-card">
+
+            <div class="card-header">
+
+                <h2>Contact Messages</h2>
+
+            </div>
+
+            <div id="messagesContainer">
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+<!-- SCRIPT -->
+
+<script>
+
+//
+// LOAD NOTICES
+//
+
+fetch("/notices-data")
+
+.then(res => res.json())
+
+.then(data => {
+
+    const table =
+    document.getElementById("noticeTableBody");
+
+    data.forEach(notice => {
+
+        table.innerHTML += `
+
+        <tr>
+
+            <td>${notice.title}</td>
+
+            <td>${notice.category}</td>
+
+            <td>${notice.date}</td>
+
+            <td>
+                <span class="status active">
+                    Published
+                </span>
+            </td>
+
+        </tr>
+
+        `;
+
+    });
+
+});
+
+//
+// LOAD CONTACT MESSAGES
+//
+
+fetch("/messages-data")
+
+.then(res => res.json())
+
+.then(data => {
+
+    const container =
+    document.getElementById("messagesContainer");
+
+    data.forEach(msg => {
+
+        container.innerHTML += `
+
+        <div class="message-box"
+        style="
+        background:#fff;
+        padding:20px;
+        border-radius:12px;
+        margin-top:20px;
+        box-shadow:0 2px 10px rgba(0,0,0,0.08);
+        ">
+
+            <h3 style="margin-bottom:10px;">
+                ${msg.subject}
+            </h3>
+
+            <p>
+                <strong>Name:</strong>
+                ${msg.name}
+            </p>
+
+            <p>
+                <strong>Email:</strong>
+                ${msg.email}
+            </p>
+
+            <p style="margin-top:10px;">
+                ${msg.message}
+            </p>
+
+        </div>
+
+        `;
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>
