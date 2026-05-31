@@ -7,9 +7,7 @@ const db = require("./database/db");
 
 const app = express();
 
-/* =========================
-   MIDDLEWARE
-========================= */
+
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -24,9 +22,7 @@ app.use(
     })
 );
 
-/* =========================
-   PUBLIC PAGES
-========================= */
+
 
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "index.html"));
@@ -56,9 +52,6 @@ app.get("/signup", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "signup.html"));
 });
 
-/* =========================
-   STUDENT PAGES
-========================= */
 
 app.get("/student/dashboard", (req, res) => {
     res.sendFile(
@@ -90,9 +83,7 @@ app.get("/student/notices", (req, res) => {
     );
 });
 
-/* =========================
-   ADMIN PAGES
-========================= */
+
 
 app.get("/admin/dashboard", (req, res) => {
     res.sendFile(
@@ -130,9 +121,7 @@ app.get("/admin/settings", (req, res) => {
     );
 });
 
-/* =========================
-   SIGNUP USER
-========================= */
+
 
 app.post("/signup-user", async (req, res) => {
 
@@ -234,9 +223,7 @@ app.post("/signup-user", async (req, res) => {
 
 });
 
-/* =========================
-   LOGIN USER
-========================= */
+
 
 app.post("/login-user", (req, res) => {
 
@@ -313,9 +300,7 @@ app.post("/login-user", (req, res) => {
 
 });
 
-/* =========================
-   CURRENT USER
-========================= */
+
 
 app.get("/current-user", (req, res) => {
 
@@ -362,9 +347,7 @@ app.get("/students-data", (req, res) => {
 
 });
 
-/* =========================
-   DELETE STUDENT
-========================= */
+
 
 app.delete("/delete-student/:id", (req, res) => {
 
@@ -395,9 +378,7 @@ app.delete("/delete-student/:id", (req, res) => {
 
 });
 
-/* =========================
-   EDIT STUDENT
-========================= */
+
 
 app.put("/edit-student/:id", (req, res) => {
 
@@ -436,9 +417,7 @@ app.put("/edit-student/:id", (req, res) => {
 
 });
 
-/* =========================
-   ADD NOTICE
-========================= */
+
 
 app.post("/add-notice", (req, res) => {
 
@@ -476,9 +455,7 @@ app.post("/add-notice", (req, res) => {
 
 });
 
-/* =========================
-   GET NOTICES
-========================= */
+
 
 app.get("/notices-data", (req, res) => {
 
@@ -502,9 +479,7 @@ app.get("/notices-data", (req, res) => {
 
 });
 
-/* =========================
-   CONTACT FORM
-========================= */
+
 
 app.post("/send-message", (req, res) => {
 
@@ -543,9 +518,7 @@ app.post("/send-message", (req, res) => {
 
 });
 
-/* =========================
-   GET MESSAGES
-========================= */
+
 
 app.get("/messages-data", (req, res) => {
 
@@ -569,9 +542,7 @@ app.get("/messages-data", (req, res) => {
 
 });
 
-/* =========================
-   LOGOUT
-========================= */
+
 
 app.get("/logout", (req, res) => {
 
@@ -598,9 +569,7 @@ app.get("/logout", (req, res) => {
     });
 
 });
-/* =========================
-   DELETE STUDENT
-========================= */
+
 
 app.delete("/delete-student/:id", (req, res) => {
 
@@ -631,9 +600,7 @@ app.delete("/delete-student/:id", (req, res) => {
 
 });
 
-/* =========================
-   EDIT STUDENT
-========================= */
+
 
 app.put("/edit-student/:id", (req, res) => {
 
@@ -672,9 +639,6 @@ app.put("/edit-student/:id", (req, res) => {
 
 });
 
-/* =========================
-   CURRENT USER
-========================= */
 
 app.get("/current-user", (req, res) => {
 
@@ -690,9 +654,7 @@ app.get("/current-user", (req, res) => {
 
 });
 
-/* =========================
-UPDATE PROFILE
-========================= */
+
 
 app.put("/update-profile", (req, res) => {
 
@@ -738,9 +700,7 @@ app.put("/update-profile", (req, res) => {
 
 });
 
-/* =========================
-UPDATE COURSE
-========================= */
+
 
 app.put("/update-course", (req, res) => {
 
@@ -778,9 +738,7 @@ app.put("/update-course", (req, res) => {
 
 });
 
-/* =========================
-GET COURSES
-========================= */
+
 
 app.get("/courses-data", (req, res) => {
 
@@ -808,9 +766,7 @@ app.get("/courses-data", (req, res) => {
 
 });
 
-/* =========================
-ADD COURSE
-========================= */
+
 
 app.post("/add-course", (req, res) => {
 
@@ -848,9 +804,7 @@ app.post("/add-course", (req, res) => {
 
 });
 
-/* =========================
-ADMIN ADD STUDENT
-========================= */
+
 
 app.post("/admin-add-student", async (req, res) => {
 
@@ -920,13 +874,7 @@ app.post("/admin-add-student", async (req, res) => {
 
 });
 
-/* =========================
-ADD COURSE
-========================= */
 
-/* =========================
-ADD COURSE
-========================= */
 
 app.post("/add-course", (req, res) => {
 
@@ -978,9 +926,7 @@ app.post("/add-course", (req, res) => {
 
 });
 
-/* =========================
-GET COURSES
-========================= */
+
 
 app.get("/courses-data", (req, res) => {
 
@@ -1008,9 +954,7 @@ app.get("/courses-data", (req, res) => {
 
 });
 
-/* =========================
-UPDATE PROFILE
-========================= */
+
 
 app.put("/update-profile", (req, res) => {
 
@@ -1071,9 +1015,7 @@ app.put("/update-profile", (req, res) => {
     );
 
 });
-/* =========================
-UPDATE COURSE
-========================= */
+
 
 app.put("/update-course", (req, res) => {
 
@@ -1868,9 +1810,7 @@ app.get("/student-dashboard-stats",(req,res)=>{
     );
 
 });
-/* =========================
-   SERVER
-========================= */
+
 
 const PORT = 3000;
 
