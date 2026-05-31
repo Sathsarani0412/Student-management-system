@@ -4,6 +4,37 @@
 
 Student Management System is a web-based application developed to simplify student administration, academic record management, attendance tracking, result management, and communication between administrators and students. The system provides separate dashboards for administrators and students, enabling efficient management of academic information through a centralized platform.
 
+<img width="300" height="150" alt="image" src="https://github.com/user-attachments/assets/d19e41c9-b76f-4791-814b-5ac22ee3d8e7" />
+<img width="300" height="150" alt="image" src="https://github.com/user-attachments/assets/9219f18c-d9f9-4aff-a821-321ddce4dcbe" />
+<img width="300" height="150" alt="image" src="https://github.com/user-attachments/assets/bf455df3-d6d7-4502-b5aa-fc4faac26f63" />
+<img width="300" height="150" alt="image" src="https://github.com/user-attachments/assets/4f255366-cf94-493e-9fbb-88ea69a515ad" />
+<img width="300" height="150" alt="image" src="https://github.com/user-attachments/assets/8e4e9988-8c9c-4919-8de6-c462ecdac41b" />
+<img width="300" height="150" alt="image" src="https://github.com/user-attachments/assets/4a2ff4b8-e484-41f5-8a10-9c4c11627174" />
+<img width="300" height="150" alt="image" src="https://github.com/user-attachments/assets/87262a24-f7e0-4f4f-acc3-f9683da7ed4b" />
+<img width="300" height="150" alt="image" src="https://github.com/user-attachments/assets/a1005cc3-211f-43ed-9516-d4634497cce4" />
+<img width="300" height="150" alt="image" src="https://github.com/user-attachments/assets/94ad6204-20d0-41a8-9319-86b3399c4c8f" />
+<img width="300" height="150" alt="image" src="https://github.com/user-attachments/assets/024f9e91-9ac2-4aca-9088-2b383c9a785c" />
+<img width="300" height="150" alt="image" src="https://github.com/user-attachments/assets/9252c1d1-fa67-43a4-8140-4ae34f9da85d" />
+<img width="300" height="150" alt="image" src="https://github.com/user-attachments/assets/d9a57c49-8c4c-41de-adc8-856b1266a9ca" />
+<img width="300" height="150" alt="image" src="https://github.com/user-attachments/assets/4901c9f9-eb02-419e-9504-cf32f2224fc9" />
+<img width="300" height="150" alt="image" src="https://github.com/user-attachments/assets/019c28fa-c247-4df7-868b-a6326cbde2db" />
+<img width="300" height="150" alt="image" src="https://github.com/user-attachments/assets/4f2675b3-30f0-4177-be1b-51a016819611" />
+<img width="300" height="150" alt="image" src="https://github.com/user-attachments/assets/88b924cd-522f-472f-a867-5c18a7fe9940" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Features
 
 ### Admin Dashboard
